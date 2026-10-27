@@ -1,0 +1,10 @@
+{
+  "updated_at": "2026-10-27T04:32:00+00:00",
+  "metrics": {
+    "vae_recon_mse": 0.00869,
+    "vae_kl": 5.922,
+    "vae_total_loss": 0.01388
+  },
+  "cvae_repo": "bundled with the API (backend/assets/cvae)",
+  "notes": "CVAE trained on CPU by training/scripts/train_cvae_local.py; other metrics come from the Colab notebooks."
+}

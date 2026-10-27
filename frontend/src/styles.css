@@ -1,0 +1,136 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens from the ReviewLens canvas. Sentiment colours carry meaning; nothing else is tinted. */
+:root {
+  --paper: #f6f7f9;
+  --surface: #ffffff;
+  --sunken: #eef1f5;
+  --line: #e3e6ec;
+  --line-strong: #c9cfd9;
+  --ink: #16213a;
+  --ink-2: #4a5468;
+  --ink-3: #667085;
+  --primary: #16213a;
+  --on-primary: #ffffff;
+  --pos: #1f8a5a;
+  --pos-ink: #0b6b41;
+  --pos-mark: #c9efd9;
+  --pos-soft: #eaf7f0;
+  --neg: #e86a57;
+  --neg-ink: #a3201a;
+  --neg-mark: #ffd3cc;
+  --neg-soft: #fff6f4;
+  --neu: #e2b93b;
+  --neu-ink: #6e5200;
+  --neu-mark: #f6e7b0;
+  --neu-soft: #fbf1d3;
+  --bar: #4a5d8a;
+  --against: #8a94a6;
+}
+
+.dark {
+  --paper: #0e1322;
+  --surface: #151c2f;
+  --sunken: #1d2640;
+  --line: #27314d;
+  --line-strong: #3a4566;
+  --ink: #e8ecf4;
+  --ink-2: #b3bccd;
+  --ink-3: #939db2;
+  --primary: #e8ecf4;
+  --on-primary: #0e1322;
+  --pos: #3fb37f;
+  --pos-ink: #85dfb0;
+  --pos-mark: rgba(63, 179, 127, 0.34);
+  --pos-soft: rgba(63, 179, 127, 0.14);
+  --neg: #f07c6a;
+  --neg-ink: #ffaa9c;
+  --neg-mark: rgba(240, 124, 106, 0.36);
+  --neg-soft: rgba(240, 124, 106, 0.1);
+  --neu: #e7c35a;
+  --neu-ink: #f3d585;
+  --neu-mark: rgba(231, 195, 90, 0.3);
+  --neu-soft: rgba(231, 195, 90, 0.12);
+  --bar: #8ea2d6;
+  --against: #8a94a6;
+}
+
+@theme inline {
+  --font-sans: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Literata', Georgia, 'Times New Roman', serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-pos: var(--pos);
+  --color-pos-ink: var(--pos-ink);
+  --color-pos-mark: var(--pos-mark);
+  --color-pos-soft: var(--pos-soft);
+  --color-neg: var(--neg);
+  --color-neg-ink: var(--neg-ink);
+  --color-neg-mark: var(--neg-mark);
+  --color-neg-soft: var(--neg-soft);
+  --color-neu: var(--neu);
+  --color-neu-ink: var(--neu-ink);
+  --color-neu-mark: var(--neu-mark);
+  --color-neu-soft: var(--neu-soft);
+  --color-bar: var(--bar);
+  --color-against: var(--against);
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--neu-mark);
+  }
+}
+
+@layer components {
+  /* The highlighter stroke under an aspect: the one bold element of the design. */
+  .mark-positive,
+  .mark-negative,
+  .mark-neutral {
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background 120ms ease;
+  }
+  .mark-positive { background: linear-gradient(180deg, transparent 56%, var(--pos-mark) 56%); }
+  .mark-negative { background: linear-gradient(180deg, transparent 56%, var(--neg-mark) 56%); }
+  .mark-neutral { background: linear-gradient(180deg, transparent 56%, var(--neu-mark) 56%); }
+  .mark-active.mark-positive { background: var(--pos-mark); outline: 2px solid var(--pos); outline-offset: 1px; }
+  .mark-active.mark-negative { background: var(--neg-mark); outline: 2px solid var(--neg); outline-offset: 1px; }
+  .mark-active.mark-neutral { background: var(--neu-mark); outline: 2px solid var(--neu); outline-offset: 1px; }
+
+  .pixelated { image-rendering: pixelated; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

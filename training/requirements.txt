@@ -1,0 +1,15 @@
+# Colab already ships torch, tensorflow and keras; these are the extras the notebooks need.
+transformers>=4.46,<6
+datasets>=3.0
+accelerate>=1.0
+seqeval>=1.2.2
+scikit-learn>=1.5
+sentencepiece>=0.2
+protobuf>=4.25
+gensim>=4.3.3
+lime>=0.2.0.1
+scikit-image>=0.24
+huggingface_hub>=0.25
+pillow>=10.4
+matplotlib>=3.8
+librosa>=0.10

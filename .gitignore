@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.env
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+.vercel
+
+# Data and training outputs
+training/data/
+training/out/
+*.ckpt
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+

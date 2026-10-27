@@ -1,0 +1,33 @@
+name: Deploy API to Modal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      REVIEWLENS_HF_NAMESPACE: ${{ vars.HF_NAMESPACE || 'DatDuc' }}
+      REVIEWLENS_ALLOWED_ORIGINS: ${{ vars.ALLOWED_ORIGINS || 'http://localhost:5173' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Modal credentials
+        run: |
+          if [ -z "$MODAL_TOKEN_ID" ] || [ -z "$MODAL_TOKEN_SECRET" ]; then
+            echo "::error::Add MODAL_TOKEN_ID and MODAL_TOKEN_SECRET as repository secrets (modal.com > Settings > API tokens)."
+            exit 1
+          fi
+      - run: pip install modal
+      - name: Deploy
+        working-directory: backend
+        run: modal deploy modal_app.py
