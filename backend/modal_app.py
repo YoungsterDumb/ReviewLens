@@ -15,13 +15,14 @@ HERE = Path(__file__).resolve().parent
 APP_NAME = os.environ.get("REVIEWLENS_MODAL_APP", "reviewlens-api")
 
 # Runtime configuration baked into the image; override at deploy time through the environment.
+# Values become Dockerfile ENV lines, so keep backslashes out of them (write `[.]`, not `\.`).
 CONFIG = {
     "KERAS_BACKEND": "torch",
     "HF_HOME": "/cache/hf",
     "TOKENIZERS_PARALLELISM": "false",
     "REVIEWLENS_HF_NAMESPACE": os.environ.get("REVIEWLENS_HF_NAMESPACE", "DatDuc"),
     "REVIEWLENS_ALLOWED_ORIGINS": os.environ.get("REVIEWLENS_ALLOWED_ORIGINS", "http://localhost:5173"),
-    "REVIEWLENS_ALLOWED_ORIGIN_REGEX": os.environ.get("REVIEWLENS_ALLOWED_ORIGIN_REGEX", r"https://[a-z0-9-]+\.vercel\.app"),
+    "REVIEWLENS_ALLOWED_ORIGIN_REGEX": os.environ.get("REVIEWLENS_ALLOWED_ORIGIN_REGEX", "https://[a-z0-9-]+[.]vercel[.]app"),
     "REVIEWLENS_TORCH_THREADS": "4",
 }
 

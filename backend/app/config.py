@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     stub: bool = False
 
     allowed_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
-    allowed_origin_regex: str = r"https://[a-z0-9-]+\.vercel\.app"
+    allowed_origin_regex: str = "https://[a-z0-9-]+[.]vercel[.]app"
 
     max_text_chars: int = 20_000
     max_image_mb: float = 8
